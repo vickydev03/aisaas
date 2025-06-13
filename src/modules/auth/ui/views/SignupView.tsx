@@ -2,6 +2,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import React, { useState } from "react";
 import { z } from "zod";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -11,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { OctagonAlertIcon } from "lucide-react";
+import { Github, OctagonAlertIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertTitle } from "@/components/ui/alert";
@@ -168,11 +170,31 @@ export function SignUpView() {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-4 ">
-                  <Button variant={"outline"} type="button" className="w-full">
-                    Google
+                  <Button
+                    variant={"outline"}
+                    type="button"
+                    className="w-full"
+                    onClick={() => {
+                      authClient.signIn.social({
+                        provider: "google",
+                        callbackURL: "/",
+                      });
+                    }}
+                  >
+                    <FcGoogle/>
                   </Button>
-                  <Button variant={"outline"} type="button" className="w-full">
-                    Github
+                  <Button
+                    variant={"outline"}
+                    type="button"
+                    className="w-full"
+                    onClick={() => {
+                      authClient.signIn.social({
+                        provider: "github",
+                        callbackURL: "/",
+                      });
+                    }}
+                  >
+                    <FaGithub />
                   </Button>
                 </div>
                 <div className="text-center text-sm ">
