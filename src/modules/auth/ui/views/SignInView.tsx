@@ -4,6 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import React, { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 import {
   Form,
   FormControl,
@@ -122,11 +125,31 @@ export function SignInView() {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-4 ">
-                  <Button variant={"outline"} type="button" className="w-full">
-                    Google
+                  <Button
+                    variant={"outline"}
+                    type="button"
+                    className="w-full"
+                    onClick={() => {
+                      authClient.signIn.social({
+                        provider: "google",
+                        callbackURL: "/",
+                      });
+                    }}
+                  >
+                    <FcGoogle/>
                   </Button>
-                  <Button variant={"outline"} type="button" className="w-full">
-                    Github
+                  <Button
+                    variant={"outline"}
+                    type="button"
+                    className="w-full"
+                    onClick={() => {
+                      authClient.signIn.social({
+                        provider: "github",
+                        callbackURL: "/",
+                      });
+                    }}
+                  >
+                    <FaGithub/>
                   </Button>
                 </div>
                 <div className="text-center text-sm ">
