@@ -5,6 +5,7 @@ import {
   CommandDialog,
   CommandEmpty,
   CommandGroup,
+  CommandResponsiveDialog,
   CommandInput,
   CommandItem,
   CommandList,
@@ -19,12 +20,12 @@ interface Props {
 
 function DashBoardCmd({ open, setOpen }: Props) {
   return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
+    <CommandResponsiveDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="find a meeting with agents" />
       <CommandList>
         <CommandItem>Test</CommandItem>
       </CommandList>
-    </CommandDialog>
+    </CommandResponsiveDialog>
   );
 }
 
