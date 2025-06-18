@@ -9,12 +9,13 @@ function AgentsViews() {
   const trpc = useTRPC();
 
   const { data } = useSuspenseQuery(trpc.agents.getmany.queryOptions());
-
+  console.log(data);
+  
   return (
     <>
       <ResponsiveDialog
         onOpenChange={() => {}}
-        open={true}
+        open={false}
         title={"test"}
         description="test description "
       >
