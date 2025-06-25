@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Github, OctagonAlertIcon } from "lucide-react";
+import {  OctagonAlertIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertTitle } from "@/components/ui/alert";
@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const SignupSchema = z
   .object({
@@ -210,7 +211,7 @@ export function SignUpView() {
             </form>
           </Form>
           <div className="bg-radial from-sidebar-accent to-sidebar relative  hidden  md:flex flex-col gap-y-4 items-center justify-center">
-            <img src="/logo.svg" className=" h-[80px] w-[80px] " alt="Logo" />
+            <Image width={100} height={100} src="/logo.svg" className=" h-[80px] w-[80px] " alt="Logo" />
             <p className="text-2xl font-semibold  text-white ">Hello ai</p>
           </div>
         </CardContent>

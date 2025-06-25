@@ -12,7 +12,7 @@ import {
 
 import {
   Drawer,
-  DrawerClose,
+  // DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -72,7 +72,10 @@ function DashboardUserButton() {
             <DrawerDescription>{data.user.email}</DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
-            <Button variant={"outline"} onClick={() => {}}>
+            <Button
+              variant={"outline"}
+              onClick={() => authClient.customer.portal()}
+            >
               <CreditCardIcon className="size-4 text-black" />
               Billing
             </Button>
@@ -116,7 +119,10 @@ function DashboardUserButton() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="flex justify-between items-center cursor-pointer">
+        <DropdownMenuItem
+          onClick={() => authClient.customer.portal()}
+          className="flex justify-between items-center cursor-pointer"
+        >
           Billing
           <CreditCardIcon className="size-4" />
         </DropdownMenuItem>

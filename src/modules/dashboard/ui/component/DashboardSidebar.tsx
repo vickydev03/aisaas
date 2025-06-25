@@ -18,12 +18,13 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import DashboardUserButton from "./DashboardUserButton";
+import DashboardTrail from "./DashboardTrail";
 
 const firstSection = [
   {
     icon: VideoIcon,
-    label: "Hello",
-    href: "/hello",
+    label: "Metting",
+    href: "/meetings",
   },
   {
     icon: BotIcon,
@@ -110,7 +111,8 @@ function DashboardSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="text-white">
-        <DashboardUserButton/>
+        <DashboardTrail/>
+        <DashboardUserButton />
       </SidebarFooter>
     </Sidebar>
   );

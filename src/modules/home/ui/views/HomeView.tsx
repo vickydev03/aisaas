@@ -1,11 +1,18 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
-import React from "react";
+import { redirect } from "next/navigation";
+// import React from "react";
 
 function HomeView() {
-  <div></div>;
+  const { data } = authClient.useSession();
+
+  if (!data?.user) {
+    // redirect("/sign-in")
+    redirect("/sign-in");
+  } else {
+    redirect("/agents");
+  }
 }
 
 export default HomeView;
