@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 async function page() {
-  const session  =await auth.api.getSession({
+  const session = auth.api.getSession({
     headers: await headers(),
   });
 

@@ -35,7 +35,38 @@ function AgentsForm({ onSuccess, onCancel, intialvalues }: Props) {
   const createAgents = useMutation(
     trpc.agents.create.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries(trpc.agents.getmany.queryOptions());
+        await queryClient.invalidateQueries(
+          trpc.agents.getmany.queryOptions({})
+        );
+        await queryClient.invalidateQueries(
+          trpc.premium.getFreeUsage.queryOptions()
+        );
+
+        // if (intialvalues?.id) {
+        //   await queryClient.invalidateQueries(
+        //     trpc.agents.getOne.queryOptions({ id: intialvalues.id })
+        //   );
+        // }
+
+        // todo free tier
+
+        onSuccess?.();
+      },
+      onError: (error) => {
+        toast.error(error.message);
+
+        if (error.data?.code === "FORBIDDEN") {
+          router.push("/upgrade");
+        }
+      },
+    })
+  );
+  const updateAgents = useMutation(
+    trpc.agents.update.mutationOptions({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(
+          trpc.agents.getmany.queryOptions({})
+        );
 
         if (intialvalues?.id) {
           await queryClient.invalidateQueries(
@@ -61,11 +92,11 @@ function AgentsForm({ onSuccess, onCancel, intialvalues }: Props) {
   });
 
   const isEdit = !!intialvalues?.id;
-  const isPending = createAgents.isPending;
+  const isPending = createAgents.isPending || updateAgents.isPending;
 
   const onSubmit = (values: z.infer<typeof agentsInsertSchema>) => {
     if (isEdit) {
-      console.log("updating");
+      updateAgents.mutate({ ...values, id: intialvalues.id });
     } else {
       createAgents.mutate(values);
     }

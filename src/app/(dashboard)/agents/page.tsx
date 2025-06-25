@@ -7,15 +7,27 @@ import ListHeader from "@/modules/agents/ui/component/ListHeader";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-export default async function Home() {
+import { loadAgentsFilter } from "@/modules/agents/hooks/searchParams";
+import { SearchParams } from "nuqs";
+
+interface Props {
+  searchParams: Promise<SearchParams>;
+}
+export default async function Home({ searchParams }: Props) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   if (!session?.user) {
     redirect("/sign-in");
   }
+
+  const filters = await loadAgentsFilter(searchParams);
+
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(trpc.agents.getmany.queryOptions());
+  void queryClient.prefetchQuery(
+    trpc.agents.getmany.queryOptions({ ...filters })
+  );
+
   return (
     <>
       <ListHeader />

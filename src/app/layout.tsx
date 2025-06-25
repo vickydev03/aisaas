@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 const inter = Inter({
   subsets: ["latin"],
 });
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,8 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}  antialiased`}>
-        <TRPCReactProvider>{children}
-          <Toaster/>
+        <TRPCReactProvider>
+          <NuqsAdapter>
+            {children}
+            <Toaster />
+          </NuqsAdapter>
         </TRPCReactProvider>
       </body>
     </html>

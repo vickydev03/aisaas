@@ -6,13 +6,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
-import { useIsMobile } from "@/hooks/use-mobile";
-import {
-  Drawer,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-} from "./ui/drawer";
+// import { useIsMobile } from "@/hooks/use-mobile";
+// import {
+//   Drawer,
+//   DrawerDescription,
+//   DrawerHeader,
+//   DrawerTitle,
+// } from "./ui/drawer";
 
 interface Props {
   title: string;
@@ -28,21 +28,22 @@ function ResponsiveDialog({
   onOpenChange,
   open,
 }: Props) {
-  const isMobile = useIsMobile();
-  if (isMobile) {
-   return <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerHeader>
-        <DrawerTitle>{title}</DrawerTitle>
-        <DrawerDescription>{description}</DrawerDescription>
-      </DrawerHeader>
-      <div className="p-4 ">{children}</div>
-    </Drawer>;
-  }
+
+  // const isMobile = useIsMobile();
+  // if (isMobile) {
+  //  return <Drawer open={open} onOpenChange={onOpenChange}>
+  //     <DrawerHeader>
+  //       <DrawerTitle>{title}</DrawerTitle>
+  //       <DrawerDescription>{description}</DrawerDescription>
+  //     </DrawerHeader>
+  //     <div className="p-4 ">{children}</div>
+  //   </Drawer>;
+  // }
   return <Dialog open={open} onOpenChange={onOpenChange}>
     <DialogContent>
       <DialogHeader>
         <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{title}</DialogDescription>
+        <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
       {children}
     </DialogContent>
