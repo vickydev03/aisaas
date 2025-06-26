@@ -70,6 +70,7 @@ function CallLoby({ onJoin }: Props) {
   //   );
   // };
 
+  
   return (
     <div className="flex   items-center justify-center min-h-[200px]  w-screen h-screen   bg-radial  from-sidebar-accent to-sidebar ">
       <div className="py-4 px-8  flex items-center flex-1  justify-center ">
