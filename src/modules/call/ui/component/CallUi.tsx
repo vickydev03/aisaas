@@ -9,25 +9,25 @@ interface Props {
 }
 function CallUi({ meetingName }: Props) {
   const call = useCall();
-  const [isCameraOn, setIsCameraOn] = useState(true);
-  const [isMicrophoneOn, setIsMicrophoneOn] = useState(true);
+  // const [isCameraOn, setIsCameraOn] = useState(true);
+  // const [isMicrophoneOn, setIsMicrophoneOn] = useState(true);
 
   const [show, setShow] = useState<"lobby" | "call" | "ended">("lobby");
   const handleJoin = async () => {
     if (!call) return;
 
     // Respect state
-    if (isCameraOn) {
-      await call.camera.enable();
-    } else {
-      await call.camera.disable();
-    }
+    // if (isCameraOn) {
+    //   await call.camera.enable();
+    // } else {
+    //   await call.camera.disable();
+    // }
 
-    if (isMicrophoneOn) {
-      await call.microphone.enable();
-    } else {
-      await call.microphone.disable();
-    }
+    // if (isMicrophoneOn) {
+    //   await call.microphone.enable();
+    // } else {
+    //   await call.microphone.disable();
+    // }
 
     await call.join();
     setShow("call");
@@ -44,10 +44,10 @@ function CallUi({ meetingName }: Props) {
       {show == "lobby" && (
         <CallLoby
           onJoin={handleJoin}
-          isMicOn={isMicrophoneOn}
-          isVideoOn={isCameraOn}
-          setMicOn={setIsMicrophoneOn}
-          setVideoOn={setIsCameraOn}
+          // isMicOn={isMicrophoneOn}
+          // isVideoOn={isCameraOn}
+          // setMicOn={setIsMicrophoneOn}
+          // setVideoOn={setIsCameraOn}
         />
       )}
       {show == "call" && (

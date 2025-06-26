@@ -9,28 +9,28 @@ import { Button } from "@/components/ui/button";
 //   ToggleAudioPreviewButton,
 //   ToggleVideoPreviewButton,
 // } from "@stream-io/video-react-sdk";
-import { SetStateAction, Dispatch } from "react";
+// import { SetStateAction, Dispatch, useRef } from "react";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 import {
   LogInIcon,
-  MicIcon,
-  MicOff,
-  VideoIcon,
-  VideoOffIcon,
+  // MicIcon,
+  // MicOff,
+  // VideoIcon,
+  // VideoOffIcon,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import CustomeVideoPreview from "./CustomeVideoPreview";
+// import CustomeVideoPreview from "./CustomeVideoPreview";
 
 interface Props {
   onJoin: () => void;
-  isVideoOn: boolean;
-  isMicOn: boolean;
-  setVideoOn: Dispatch<SetStateAction<boolean>>;
-  setMicOn: Dispatch<SetStateAction<boolean>>;
+  // isVideoOn: boolean;
+  // isMicOn: boolean;
+  // setVideoOn: Dispatch<SetStateAction<boolean>>;
+  // setMicOn: Dispatch<SetStateAction<boolean>>;
 }
-function CallLoby({ onJoin, setMicOn, setVideoOn, isMicOn, isVideoOn }: Props) {
+function CallLoby({ onJoin }: Props) {
   // const { useCameraState, useMicrophoneState } = useCallStateHooks();
 
   // const { hasBrowserPermission: hasCameraPermission } = useCameraState();
@@ -76,7 +76,7 @@ function CallLoby({ onJoin, setMicOn, setVideoOn, isMicOn, isVideoOn }: Props) {
         <div className=" flex flex-col  items-center justify-center gap-y-6 bg-background  rounded-lg p-10  shadow-sm w-[300px] sm:w-[350px] md:w-[400px] ">
           <div className="flex  flex-col  gap-y-2 text-center ">
             <h6 className=" text-lg  font-medium ">Ready to join</h6>
-            <p className="text-sm ">Set up your call before joining </p>
+            <p className="text-sm ">Join the  meeting  </p>
           </div>
           <div className="">
             {/* <VideoPreview
@@ -88,11 +88,11 @@ function CallLoby({ onJoin, setMicOn, setVideoOn, isMicOn, isVideoOn }: Props) {
                   : allowBrowserPermission
               }
             /> */}
-            <CustomeVideoPreview isMicOn={isMicOn} isVideoOn={isVideoOn} />
+            {/* <CustomeVideoPreview isMicOn={isMicOn} isVideoOn={isVideoOn} /> */}
           </div>
           <div className=" flex gap-x-2">
             {/* <ToggleVideoPreviewButton /> */}
-            <Button
+            {/* <Button
               onClick={() => setVideoOn((e) => !e)}
               className="p-4 rounded-4xl"
               variant={"outline"}
@@ -113,7 +113,7 @@ function CallLoby({ onJoin, setMicOn, setVideoOn, isMicOn, isVideoOn }: Props) {
               ) : (
                 <MicOff className=" stroke-red-500" />
               )}
-            </Button>
+            </Button> */}
             {/* <ToggleAudioPreviewButton /> */}
           </div>
           <div className="flex  gap-x-2  justify-between  w-full ">
