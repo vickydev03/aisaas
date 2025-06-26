@@ -155,6 +155,9 @@ import { streamVideo } from "@/lib/sream-video";
 import { NextRequest, NextResponse } from "next/server";
 import { inngest } from "@/inngest/client";
 
+export const config = {
+  runtime: "nodejs",
+};
 function verifysignatureWithSdk(body: string, signature: string): boolean {
   return streamVideo.verifyWebhook(body, signature);
 }
@@ -224,19 +227,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Agent not found" }, { status: 404 });
     }
 
-    // const call = streamVideo.video.call("default", meetingId);
+    const call = streamVideo.video.call("default", meetingId);
 
-    // const realtimeClient = await streamVideo.video.connectOpenAi({
-    //   call,
-    //   openAiApiKey: process.env.OPEN_API_KEY!,
-    //   agentUserId: existingAgent.id,
-    // });
+    const realtimeClient = await streamVideo.video.connectOpenAi({
+      call,
+      openAiApiKey: process.env.OPEN_API_KEY!,
+      agentUserId: existingAgent.id,
+    });
 
-    // realtimeClient.updateSession({
-    //   instructions: existingAgent.instruction,
-    // });
-  } 
-  else if (eventtype === "call.session_participant_left") {
+    realtimeClient.updateSession({
+      instructions: existingAgent.instruction,
+    });
+  } else if (eventtype === "call.session_participant_left") {
     const event = payload as CallSessionParticipantLeftEvent;
     const meetingId = event.call_cid.split(":")[1];
 
@@ -246,8 +248,8 @@ export async function POST(req: NextRequest) {
 
     const call = streamVideo.video.call("default", meetingId);
     const callState = await call.get();
-    console.log(callState.members,"member ");
-    
+    console.log(callState.members, "member ");
+
     const participants = callState.members.length;
     if (participants > 0) {
       console.log("keep it going");
