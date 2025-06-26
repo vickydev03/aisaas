@@ -124,3 +124,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+/*  */
+
+.str-video__video-preview-container {
+  height: 100px;
+}
+.str-video__video-preview {
+  width: 100px;
+  height: 100px;
+}
+
+.video-preview {
+  width: 300px;
+  height: 200px;
+  object-fit: contain;
+}

@@ -24,7 +24,7 @@ function CallProvider({ meetingId, meetingName }: Props) {
     );
   }
   return (
-    <div>
+    // <div className="">
       <CallConnect
         meetingId={meetingId}
         meetingName={meetingName}
@@ -32,7 +32,7 @@ function CallProvider({ meetingId, meetingName }: Props) {
         userName={data.user.name}
         userImage={data.user.image ?? generateAvartar({seed:data.user.name,variant:"initials"})}
       />
-    </div>
+    // </div>
   );
 }
 
