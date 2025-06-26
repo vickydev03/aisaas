@@ -235,7 +235,8 @@ export async function POST(req: NextRequest) {
     realtimeClient.updateSession({
       instructions: existingAgent.instruction,
     });
-  } else if (eventtype === "call.session_participant_left") {
+  } 
+  else if (eventtype === "call.session_participant_left") {
     const event = payload as CallSessionParticipantLeftEvent;
     const meetingId = event.call_cid.split(":")[1];
 
@@ -244,7 +245,15 @@ export async function POST(req: NextRequest) {
     }
 
     const call = streamVideo.video.call("default", meetingId);
-    await call.end();
+    const callState = await call.get();
+    console.log(callState.members,"member ");
+    
+    const participants = callState.members.length;
+    if (participants > 0) {
+      console.log("keep it going");
+    } else {
+      await call.end();
+    }
   } else if (eventtype === "call.session_ended") {
     const event = payload as CallEndedEvent;
     const meetingId = event.call.custom?.meetingId;
@@ -277,7 +286,7 @@ export async function POST(req: NextRequest) {
       name: "meeting/processing",
       data: {
         meetingId: meetingId,
-        transcriptUrl:updatedMeeting.transscriptUrl
+        transcriptUrl: updatedMeeting.transscriptUrl,
       },
     });
   } else if (eventtype === "call.recording_ready") {
