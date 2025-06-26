@@ -7,6 +7,7 @@ import {
   StreamVideoClient,
   Call,
   CallingState,
+  // VideoPreview,
 } from "@stream-io/video-react-sdk";
 import { LoaderIcon } from "lucide-react";
 
@@ -84,11 +85,14 @@ function CallConnect({
     );
   }
   return (
+    // <div className="responsive-video-container">
+
     <StreamVideo client={client}>
       <StreamCall call={call}>
-        <CallUi meetingName={meetingName}/>
+        <CallUi meetingName={meetingName} />
       </StreamCall>
     </StreamVideo>
+    // </div>
   );
 }
 
