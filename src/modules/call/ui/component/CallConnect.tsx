@@ -90,7 +90,7 @@ function CallConnect({
 
     <StreamVideo client={client}>
       <StreamCall call={call}>
-        <CallUi meetingName={meetingName} meetingId={meetingId}/>
+        <CallUi meetingName={meetingName} />
       </StreamCall>
     </StreamVideo>
     // </div>

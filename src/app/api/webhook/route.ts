@@ -230,18 +230,34 @@ export async function POST(req: NextRequest) {
     // try {
     //   const call = streamVideo.video.call("default", meetingId);
 
-      // const realtimeClient = await streamVideo.video.connectOpenAi({
-      //   call,
-      //   openAiApiKey: process.env.OPEN_API_KEY!,
-      //   agentUserId: existingAgent.id,
-      // });
+    // const realtimeClient = await streamVideo.video.connectOpenAi({
+    //   call,
+    //   openAiApiKey: process.env.OPEN_API_KEY!,
+    //   agentUserId: existingAgent.id,
+    // });
 
-      // realtimeClient.updateSession({
-      //   instructions: existingAgent.instruction,
-      // });
+    // realtimeClient.updateSession({
+    //   instructions: existingAgent.instruction,
+    // });
     // } catch (error) {
     //   // console.log(error,"error from openai");
     // }
+
+    try {
+      await fetch("https://stream-open-ai-production.up.railway.app/connect-openai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", 
+        },
+        body: JSON.stringify({
+          agentUserId: existingAgent.id,
+          instruction: existingAgent.instruction,
+          meetingId:meetingId
+        }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   } else if (eventtype === "call.session_participant_left") {
     const event = payload as CallSessionParticipantLeftEvent;
     const meetingId = event.call_cid.split(":")[1];

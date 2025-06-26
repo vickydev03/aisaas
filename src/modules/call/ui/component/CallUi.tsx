@@ -3,41 +3,41 @@ import React, { useState } from "react";
 import CallLoby from "./CallLoby";
 import CallActive from "./CallActive";
 import CallEnded from "./CallEnded";
-import { streamVideo } from "@/lib/sream-video";
-import { useTRPC } from "@/trpc/client";
-import { useQuery } from "@tanstack/react-query";
+// import { streamVideo } from "@/lib/sream-video";
+// import { useTRPC } from "@/trpc/client";
+// import { useQuery } from "@tanstack/react-query";
 
 interface Props {
   meetingName: string;
-  meetingId: string;
+  // meetingId: string;
 }
-function CallUi({ meetingName, meetingId }: Props) {
+function CallUi({ meetingName }: Props) {
   const call = useCall();
   // const [isCameraOn, setIsCameraOn] = useState(true);
   // const [isMicrophoneOn, setIsMicrophoneOn] = useState(true);
-  const trpc = useTRPC();
-  const { data } = useQuery(
-    trpc.meetings.getOne.queryOptions({ id: meetingId })
-  );
+  // const trpc = useTRPC();
+  
   const [show, setShow] = useState<"lobby" | "call" | "ended">("lobby");
   const handleJoin = async () => {
     if (!call) return;
     await call.join();
+    
 
     setShow("call");
-    if (!data?.agentId) return null;
 
-    const meeting = streamVideo.video.call("default", meetingId);
+    // if (!data?.agentId) return null;
 
-    const realtimeClient = await streamVideo.video.connectOpenAi({
-      call: meeting,
-      openAiApiKey: process.env.OPEN_API_KEY!,
-      agentUserId: data?.agentId,
-    });
+    // const meeting = streamVideo.video.call("default", meetingId);
 
-    realtimeClient.updateSession({
-      instructions: data?.agent.instruction,
-    });
+    // const realtimeClient = await streamVideo.video.connectOpenAi({
+    //   call: meeting,
+    //   openAiApiKey: process.env.OPEN_API_KEY!,
+    //   agentUserId: data?.agentId,
+    // });
+
+    // realtimeClient.updateSession({
+    //   instructions: data?.agent.instruction,
+    // });
   };
 
   const handleLeave = async () => {
